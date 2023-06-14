@@ -100,7 +100,7 @@ function createContact() {
         consoleApp.question('Adresse réelle : ', (realAddress) => {
           consoleApp.question('Département : ', (department) => {
             consoleApp.question('Pays : ', (country) => {
-              consoleApp.question('Téléphone git : ', (tel) => {
+              consoleApp.question('Téléphone : ', (tel) => {
                 consoleApp.question('Email : ', (email) => {
 
                   const data = {
@@ -138,9 +138,13 @@ function getContact() {
       getContact();
     } else {
       const contact = getContactById(optionInt);
-      displayContact(contact);
-
-      launchConsoleApp()
+      if(contact) {
+        displayContact(contact);
+        launchConsoleApp()
+      } else {
+        console.log('Aucun contact trouvé avec cet ID.');
+        getContact();
+      }
     }
   })
 }
@@ -248,13 +252,13 @@ function deleteContactF() {
             default :
               console.log('Arrête de la procédure il faut entrer y ou n');
 
-              updateContactF();
+              deleteContactF();
               break;
           }
         })
       } else {
         console.log('Aucun contact trouvé avec cet ID.');
-        updateContactF();
+        deleteContactF();
       }
     }
   })
